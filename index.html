@@ -81,7 +81,7 @@ p.show{opacity:1; transform:translateY(0);}
 </head>
 <body>
 
-<video id="bgVideo" src="v.mp4" loop></video>
+<video id="bgVideo" src="v.mp4" preload="none" playsinline></video>
 <img src="fff.png" class="edge" style="left:0%; top:0%;">
 <img src="fa.png" class="edge" style="left:0%; top:80%;">
 
@@ -99,13 +99,17 @@ p.show{opacity:1; transform:translateY(0);}
 <script>
 function openCard(){
   document.getElementById("start").classList.add("hide");
+
+  const vid = document.getElementById("bgVideo");
+  vid.volume = 0.6;
+  vid.play(); // يشتغل فقط بعد الضغط
+
   const card=document.getElementById("card");
   const text=document.getElementById("text");
-const vid = document.getElementById("bgVideo");
-vid.volume = 0.7;   // مستوى الصوت
-vid.play();         // تشغيل الصوت
+
   setTimeout(()=>card.classList.add("show"),200);
   setTimeout(()=>text.classList.add("show"),900);
+}
 
   // سقوط الزهور
   for(let i=0;i<40;i++){
@@ -116,7 +120,7 @@ vid.play();         // تشغيل الصوت
     document.body.appendChild(f);
     setTimeout(()=>f.remove(),11000);
   }
-}
+
 </script>
 
 </body>
