@@ -60,7 +60,13 @@ p.show{opacity:1; transform:translateY(0);}
   opacity:0.9;
   animation:softGlow 3s ease-in-out infinite alternate;
 }
-
+#bgVideo{
+  position:absolute;
+  width:0;
+  height:0;
+  opacity:0;
+  pointer-events:none;
+}
 /* زهور الليلي المتساقطة */
 .lily{
   position:absolute; top:-8vh;
@@ -75,7 +81,7 @@ p.show{opacity:1; transform:translateY(0);}
 </head>
 <body>
 
-
+<video id="bgVideo" src="v.mp4" loop></video>
 <img src="fff.png" class="edge" style="left:0%; top:0%;">
 <img src="fa.png" class="edge" style="left:0%; top:80%;">
 
@@ -95,7 +101,9 @@ function openCard(){
   document.getElementById("start").classList.add("hide");
   const card=document.getElementById("card");
   const text=document.getElementById("text");
-
+const vid = document.getElementById("bgVideo");
+vid.volume = 0.7;   // مستوى الصوت
+vid.play();         // تشغيل الصوت
   setTimeout(()=>card.classList.add("show"),200);
   setTimeout(()=>text.classList.add("show"),900);
 
@@ -113,4 +121,3 @@ function openCard(){
 
 </body>
 </html>
-
