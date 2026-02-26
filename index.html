@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<title>Birthday R Shape</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+  height:100vh;
+  font-family:'Cairo',sans-serif;
+  overflow:hidden;
+  background: radial-gradient(circle at top,#ffdfe7,#ffc2d1,#ffb3c6);
+}
+
+/* شاشة البداية */
+.start-screen{
+  position:absolute; inset:0;
+  display:flex; justify-content:center; align-items:center;
+  background: radial-gradient(circle,#ffd1dc,#ffc0cb);
+  z-index:5; transition:1s ease;
+}
+.start-screen.hide{opacity:0; visibility:hidden;}
+.open-btn{
+  padding:16px 40px; font-size:20px; border:none; border-radius:50px;
+  background:white; color:#e84393; font-weight:bold; cursor:pointer;
+  transition:.3s;
+}
+.open-btn:hover{ transform:scale(1.1); box-shadow:0 10px 25px rgba(0,0,0,.2); }
+
+/* بطاقة التهنئة */
+.card{
+  position:absolute; inset:0;
+  display:flex; justify-content:center; align-items:center;
+  opacity:0; transform:translateY(30px) scale(.95);
+  transition:1.4s cubic-bezier(.19,1,.22,1);
+}
+.card.show{opacity:1; transform:translateY(0) scale(1);}
+.box{
+  backdrop-filter: blur(18px);
+  background: rgba(255,255,255,0.18);
+  border-radius:28px;
+  padding:50px 60px;
+  text-align:center;
+  box-shadow:0 20px 60px rgba(0,0,0,.25);
+  color:white;
+}
+h1{font-size:44px;margin-bottom:10px;}
+p{
+  font-size:24px; opacity:0; transform:translateY(15px);
+  transition:1.5s ease;
+}
+p.show{opacity:1; transform:translateY(0);}
+
+/* صور الحافة العليا */
+.edge{
+  position:absolute; pointer-events:none;
+  width:100vw;   /* عرض كامل الشاشة */
+  height:20vh;   /* ارتفاع نسبي للشاشة */
+  opacity:0.9;
+  animation:softGlow 3s ease-in-out infinite alternate;
+}
+
+/* زهور الليلي المتساقطة */
+.lily{
+  position:absolute; top:-8vh;
+  width:6vw;    /* حجم نسبي للشاشة */
+  height:6vw;
+  background:url("stt.png"); 
+  background-size:contain; background-repeat:no-repeat;
+  opacity:0.95;  /* أصلح قيمة opacity */
+  animation:fall linear forwards;
+}
+</style>
+</head>
+<body>
+
+
+<img src="fff.png" class="edge" style="left:0%; top:0%;">
+
+<div class="start-screen" id="start">
+  <button class="open-btn" onclick="openCard()">اضغطي 😒</button>
+</div>
+
+<div class="card" id="card">
+  <div class="box">
+    <h1>Happy Birthday 😍🤍</h1>
+    <p id="text">أيامك مليئة بالسعادة والورد 🤍</p>
+  </div>
+</div>
+
+<script>
+function openCard(){
+  document.getElementById("start").classList.add("hide");
+  const card=document.getElementById("card");
+  const text=document.getElementById("text");
+
+  setTimeout(()=>card.classList.add("show"),200);
+  setTimeout(()=>text.classList.add("show"),900);
+
+  // سقوط الزهور
+  for(let i=0;i<40;i++){
+    let f=document.createElement("div");
+    f.className="lily";
+    f.style.left=Math.random()*100+"vw";
+    f.style.animationDuration=(7+Math.random()*4)+"s";
+    document.body.appendChild(f);
+    setTimeout(()=>f.remove(),11000);
+  }
+}
+</script>
+
+</body>
+</html>
